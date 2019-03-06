@@ -23,7 +23,6 @@ public class BuildingController {
 	}
 	@RequestMapping("/addBuilding")
 	public String addBuilding(){
-		List<Building> list= buildingService.selectBuildingList();
 		return "building";
 	}
 	
