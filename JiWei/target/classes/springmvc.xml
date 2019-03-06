@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo 
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd">
+	<!-- 使用组件扫描的方式可以一次扫描多个Controller -->
+	<context:component-scan base-package="com.xinhua.controller">
+	</context:component-scan>
+	<context:property-placeholder location="classpath:*.properties"/>
+	<!-- 配置注解的处理器映射器和处理器适配器 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<mvc:default-servlet-handler/>
+
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 使用前缀和后缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	 <!-- 访问静态资源文件 -->
+    <!-- <mvc:default-servlet-handler/> 需要在web.xml中配置-->
+
+    <mvc:resources location="/bootstrap-dist/**" mapping="/js/" />
+    <mvc:resources location="/bootstrap-dist/**" mapping="/css/" />
+    <mvc:resources location="/css/**" mapping="/css/" />
+    <mvc:resources location="/css/**" mapping="/js/" />
+    <mvc:resources location="/email_templates/**" mapping="/html/" />
+    <mvc:resources location="/font-awesome/**" mapping="/css/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/css/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/js/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/jpg/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/png/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/db/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/less/" />
+    <mvc:resources location="/frontend_theme/**" mapping="/scss/" />
+    <mvc:resources location="/less/**" mapping="/less/" />
+    <mvc:resources location="/img/**" mapping="/jpg/" />
+    <mvc:resources location="/img/**" mapping="/png/" />
+    <mvc:resources location="/img/**" mapping="/ico/" />
+    <mvc:resources location="/js/**" mapping="/js/" />
+    <mvc:resources location="/js/**" mapping="/css/" />
+    
+    <bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880"></property>
+	</bean>
+
+</beans>
